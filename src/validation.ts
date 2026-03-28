@@ -33,8 +33,8 @@ const REQUIRED_FIELDS: readonly (keyof ReferenceSentence)[] = [
  * 1. Every entry has `id`, `intResponse`, and `sentence` fields.
  * 2. If `requireEmbeddings` is true, every entry must also have an `embedding`.
  * 3. No reference set may use the reserved id `"mean"`.
- * 4. Each reference set must contain exactly 5 sentences.
- * 5. The `intResponse` values within each set must be exactly `{1, 2, 3, 4, 5}`.
+ * 4. Each reference set must contain at least 2 sentences.
+ * 5. The `intResponse` values within each set must form a contiguous sequence of integers with step 1.
  *
  * ### Correspondence to Python
  * Port of `_assert_reference_sentence_dataframe_structure(df, embeddings_column)`.
@@ -108,25 +108,33 @@ export function validateReferenceSentences(
       );
     }
 
-    // Must have exactly 5 entries (one per Likert point)
-    if (group.length !== 5) {
+    // Must have at least 2 entries (minimum for a distribution)
+    if (group.length < 2) {
       throw new Error(
-        `Reference set "${id}" has ${group.length} sentences, but exactly 5 are required ` +
-          `(one for each Likert scale point 1–5).`
+        `Reference set "${id}" has ${group.length} sentence(s), but at least 2 are required ` +
+          `(a Likert scale needs at least 2 points).`
       );
     }
 
     // Sort by intResponse ascending
     const sorted = [...group].sort((a, b) => a.intResponse - b.intResponse);
 
-    // intResponse values must be exactly {1, 2, 3, 4, 5}
-    const expectedResponses = [1, 2, 3, 4, 5];
+    // intResponse values must be integers
     const actualResponses = sorted.map((s) => s.intResponse);
-    for (let i = 0; i < 5; i++) {
-      if (actualResponses[i] !== expectedResponses[i]) {
+    for (const val of actualResponses) {
+      if (!Number.isInteger(val)) {
+        throw new Error(
+          `Reference set "${id}" has a non-integer intResponse value ${val}. ` +
+            `All intResponse values must be integers.`
+        );
+      }
+    }
+    for (let i = 1; i < actualResponses.length; i++) {
+      if (actualResponses[i] - actualResponses[i - 1] !== 1) {
         throw new Error(
           `Reference set "${id}" has intResponse values [${actualResponses.join(", ")}], ` +
-            `but expected exactly [1, 2, 3, 4, 5].`
+            `but they must form a contiguous sequence of integers with step 1 ` +
+            `(e.g. [1, 2, 3] or [0, 1, 2, 3, 4]).`
         );
       }
     }

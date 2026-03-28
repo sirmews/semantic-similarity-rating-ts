@@ -66,8 +66,9 @@ export interface ReferenceSentence {
   id: string;
 
   /**
-   * The integer Likert scale point this sentence represents (1-indexed).
-   * For a standard 5-point scale: 1, 2, 3, 4, or 5.
+   * The integer Likert scale point this sentence represents.
+   * Values must form a contiguous sequence with step 1 across the reference set
+   * (e.g. `1, 2, 3, 4, 5` or `-2, -1, 0, 1, 2`).
    */
   intResponse: number;
 

@@ -206,17 +206,16 @@ describe("ResponseRater input validation", () => {
     await expect(ResponseRater.create(badRefs)).rejects.toThrow(/missing required field/i);
   });
 
-  it("rejects incomplete Likert scale (only 4 entries)", async () => {
-    const refs: ReferenceSentence[] = [];
-    for (let i = 1; i <= 4; i++) {
-      refs.push({ id: "set1", intResponse: i, sentence: SAMPLE_TEXTS[i - 1] });
-    }
+  it("rejects a Likert scale with only 1 entry", async () => {
+    const refs: ReferenceSentence[] = [
+      { id: "set1", intResponse: 1, sentence: SAMPLE_TEXTS[0] },
+    ];
 
     await expect(
       ResponseRater.create(refs, {
         embeddingProvider: createMockEmbeddingProvider(),
       })
-    ).rejects.toThrow(/4 sentences.*exactly 5/i);
+    ).rejects.toThrow(/1 sentence.*at least 2/i);
   });
 });
 
