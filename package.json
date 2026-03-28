@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns integration",
+    "test:integration": "jest --testPathPatterns integration",
     "changelog": "changelogen --output CHANGELOG.md"
   },
   "keywords": [

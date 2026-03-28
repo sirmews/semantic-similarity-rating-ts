@@ -92,6 +92,10 @@ export { validateReferenceSentences } from "./validation";
 // ---------------------------------------------------------------------------
 
 export { TransformersEmbeddingProvider } from "./embeddings";
+export {
+  OpenAIEmbeddingProvider,
+  type OpenAIEmbeddingProviderOptions,
+} from "./openai-embeddings";
 
 // ---------------------------------------------------------------------------
 // High-level API

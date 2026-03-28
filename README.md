@@ -60,6 +60,25 @@ const pmfs = await rater.getResponsePmfs("set1", [
 const surveyPmf = rater.getSurveyResponsePmf(pmfs);
 ```
 
+### OpenAI embeddings
+
+Use the OpenAI embeddings API instead of the local model — no extra dependencies required (uses native `fetch`):
+
+```ts
+import {
+  ResponseRater,
+  OpenAIEmbeddingProvider,
+} from "@sirmews/semantic-similarity-rating";
+
+const provider = new OpenAIEmbeddingProvider({
+  apiKey: process.env.OPENAI_API_KEY!,
+  // model: "text-embedding-3-large",         // optional, defaults to "text-embedding-3-small"
+  // baseURL: "https://my-proxy.example.com/v1", // optional, for OpenAI-compatible APIs
+});
+
+const rater = await ResponseRater.create(refs, { embeddingProvider: provider });
+```
+
 ### Embedding mode
 
 ```ts
@@ -140,6 +159,7 @@ This port was built with strict behavioural fidelity to the Python original:
 | `compute` | Core SSR algorithm (PMF conversion & scaling) | ✅ |
 | `validation` | Reference sentence validation | ✅ |
 | `embeddings` | Embedding provider (wraps `@huggingface/transformers`) | Async |
+| `openai-embeddings` | Embedding provider (OpenAI API via `fetch`) | Async |
 | `response-rater` | High-level `ResponseRater` class | Async |
 
 ## Python ↔ TypeScript mapping
