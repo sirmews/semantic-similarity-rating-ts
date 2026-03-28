@@ -7,8 +7,8 @@
  * ## Quick start
  *
  * ```ts
- * import { ResponseRater } from "@pymc-labs/semantic-similarity-rating";
- * import type { ReferenceSentence } from "@pymc-labs/semantic-similarity-rating";
+ * import { ResponseRater } from "@sirmews/semantic-similarity-rating";
+ * import type { ReferenceSentence } from "@sirmews/semantic-similarity-rating";
  *
  * const refs: ReferenceSentence[] = [
  *   { id: "set1", intResponse: 1, sentence: "Strongly disagree" },

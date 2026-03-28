@@ -13,7 +13,7 @@ Rather than bridging to Python at runtime (child processes, HTTP servers, etc.),
 ## Installation
 
 ```bash
-npm install @pymc-labs/semantic-similarity-rating
+npm install @sirmews/semantic-similarity-rating
 ```
 
 ### Text mode (auto-computes embeddings)
@@ -31,8 +31,8 @@ If you supply your own embeddings, no additional dependencies are needed.
 ## Quick Start
 
 ```ts
-import { ResponseRater } from "@pymc-labs/semantic-similarity-rating";
-import type { ReferenceSentence } from "@pymc-labs/semantic-similarity-rating";
+import { ResponseRater } from "@sirmews/semantic-similarity-rating";
+import type { ReferenceSentence } from "@sirmews/semantic-similarity-rating";
 
 // Define reference sentences for a 5-point Likert scale
 const refs: ReferenceSentence[] = [
@@ -111,7 +111,7 @@ Convenience: `getResponsePmfs` + `getSurveyResponsePmf` in one call.
 The core algorithm is also available as standalone pure functions:
 
 ```ts
-import { responseEmbeddingsToPmf, scalePmf } from "@pymc-labs/semantic-similarity-rating";
+import { responseEmbeddingsToPmf, scalePmf } from "@sirmews/semantic-similarity-rating";
 ```
 
 ## Integrity & Cross-Validation

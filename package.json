@@ -1,5 +1,5 @@
 {
-  "name": "@pymc-labs/semantic-similarity-rating",
+  "name": "@sirmews/semantic-similarity-rating",
   "version": "1.0.0",
   "description": "TypeScript port of the Semantic-Similarity Rating (SSR) methodology for converting LLM responses to Likert-scale probability distributions",
   "main": "./lib/index.js",
