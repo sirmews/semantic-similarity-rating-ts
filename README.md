@@ -163,3 +163,7 @@ Measuring Synthetic Consumer Purchase Intent Using Semantic-Similarity Ratings.
 ## License
 
 Apache License 2.0 — see [LICENSE](./LICENSE).
+
+---
+
+Built with the help of [Amp](https://ampcode.com).
