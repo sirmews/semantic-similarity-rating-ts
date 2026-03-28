@@ -26,17 +26,24 @@ clean: ## Remove build artifacts
 
 ## — Release —
 
-.PHONY: version-patch
-version-patch: ## Bump patch version (1.0.0 → 1.0.1), commit & tag
-	npm version patch
+.PHONY: changelog
+changelog: ## Generate CHANGELOG.md from conventional commits
+	npx changelogen --output CHANGELOG.md
 
-.PHONY: version-minor
-version-minor: ## Bump minor version (1.0.0 → 1.1.0), commit & tag
-	npm version minor
+.PHONY: release-patch
+release-patch: preflight changelog ## Release patch (1.0.0 → 1.0.1): changelog, bump, commit & tag
+	git add CHANGELOG.md
+	npm version patch -m "release: %s"
 
-.PHONY: version-major
-version-major: ## Bump major version (1.0.0 → 2.0.0), commit & tag
-	npm version major
+.PHONY: release-minor
+release-minor: preflight changelog ## Release minor (1.0.0 → 1.1.0): changelog, bump, commit & tag
+	git add CHANGELOG.md
+	npm version minor -m "release: %s"
+
+.PHONY: release-major
+release-major: preflight changelog ## Release major (1.0.0 → 2.0.0): changelog, bump, commit & tag
+	git add CHANGELOG.md
+	npm version major -m "release: %s"
 
 .PHONY: pack
 pack: ## Preview the npm tarball contents (dry run)
