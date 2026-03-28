@@ -1,0 +1,47 @@
+{
+  "name": "@pymc-labs/semantic-similarity-rating",
+  "version": "1.0.0",
+  "description": "TypeScript port of the Semantic-Similarity Rating (SSR) methodology for converting LLM responses to Likert-scale probability distributions",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "!lib/**/__tests__/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest"
+  },
+  "keywords": [
+    "semantic-similarity",
+    "llm",
+    "likert",
+    "embeddings",
+    "nlp",
+    "typescript",
+    "ssr"
+  ],
+  "author": "pymc-labs",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sirmews/semantic-similarity-rating-ts.git"
+  },
+  "homepage": "https://github.com/sirmews/semantic-similarity-rating-ts",
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "jest": "^30.0.0",
+    "ts-jest": "^29.4.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0"
+  },
+  "peerDependencies": {
+    "@huggingface/transformers": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@huggingface/transformers": {
+      "optional": true
+    }
+  }
+}
